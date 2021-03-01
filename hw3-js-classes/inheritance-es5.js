@@ -39,7 +39,7 @@ Car.prototype.calculateWay = function(kilometers, fuel) {
 
 let firstCar = new Car('Hyundai', 'Sonata YF', 2011, 'белый', 120);
 
-function Bmw(name, model, year, color, maxSpeed, panoramicRoof, fuelCapacity = 60, fuelConsumption = 10) {
+function Bmw(model, year, color, maxSpeed, panoramicRoof, fuelCapacity = 60, fuelConsumption = 10) {
     Car.call(this, 'BMW', model, year, color, maxSpeed, fuelCapacity, fuelConsumption);
     this.panoramicRoof = panoramicRoof;
 }
