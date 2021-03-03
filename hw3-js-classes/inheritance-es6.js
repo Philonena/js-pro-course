@@ -52,7 +52,7 @@ class Bmw extends Car {
 }
 
 class Lexus extends Car {
-    constructor(model, year, color, maxSpeed, climateControl, fuelCapacity = 60, fuelConsumption = 10) {
+    constructor(model, year, color, maxSpeed, climateControl, fuelCapacity, fuelConsumption) {
         super('Lexus', model, year, color, maxSpeed, fuelCapacity, fuelConsumption);
         this.climateControl = climateControl;
     }
