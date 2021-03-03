@@ -1,0 +1,93 @@
+body {
+    height: 100vh;
+    background-image: url(../img/bak.jpg);
+    background-size: cover;
+}
+
+.container {
+    max-width: 1240px;
+    margin: 0px auto;
+}
+
+form {
+    padding: 50px;
+    text-align: center;
+}
+
+input {
+    background: rgba(248, 237, 185, 0.7);
+    padding: 5px 20px;
+    margin: 30px;
+    border: 1px solid gold;
+    border-radius: 10px;
+    font-size: 24px;
+    color: black;
+    font-family: 'Akaya Telivigala', cursive;
+}
+
+input::placeholder {
+    color: black;
+}
+
+#button {
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+#button:active {
+    background: rgba(248, 237, 185, 0.9);
+    box-shadow: -2px -2px 10px rgba(0,0,0,0.5);
+    padding: 3px 20px;
+}
+
+.forecast {
+    background-color: rgba(248, 237, 185, 0.7);
+    border: 1px solid gold;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.location {
+    font-family: 'Akaya Telivigala', cursive;
+    font-size: 48px;
+    text-align: center;
+    margin: 30px;
+}
+
+.weather{
+    display: flex;
+    justify-content: center;
+}
+
+.icon {
+    width: 65px;
+    margin: 0px 30px;
+    border-radius: 50%;
+}
+
+.degrees {
+    font-family: 'Akaya Telivigala', cursive;
+    font-size: 54px;
+    margin: 0px 30px;
+}
+
+.properties {
+    margin: 50px auto 0px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+}
+
+li {
+    font-family: 'Akaya Telivigala', cursive;
+    font-size: 26px;
+    text-align: center;
+}
+
+.error {
+    font-family: 'Akaya Telivigala', cursive;
+    font-size: 30px;
+    text-align: center;
+}
