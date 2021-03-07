@@ -1,122 +1,144 @@
-let data = []
-let key = localStorage.getItem('key') ? JSON.parse(localStorage.getItem('key')) : false;
-let not = localStorage.getItem('not') ? JSON.parse(localStorage.getItem('not')) : 1;
+export function showNotification(data) {
+    let isNotificationDisable = localStorage.getItem('isNotificationDisable') || false;
+    let currentNotificationId = localStorage.getItem('currentNotificationId') || 1;
 
-if (key === false) {
-    getData();
+    if (isNotificationDisable) {
+        return;
+    }
+
+    let currentNotification = data.find(el => el.id == currentNotificationId);
+
+    const notificationWrapper = document.createElement('section');
+    notificationWrapper.className = 'component';
+
+    notificationWrapper.innerHTML = `
+        <div class="notText">
+            <h3 class="notHead"></h3>
+            <p class="notBody"></p>        
+        </div>
+        <input type="button" class="close" value="&#10008;">
+        <div class="pagination">
+            <input type="button" class="prev" value="&#5130;">
+            ${data.map(notification =>
+                `<input
+                type="radio"
+                name="radioButton"
+                id="${notification.id}"
+                ${notification.id == currentNotificationId ? 'checked' : ''} />`
+            ).join('')}
+            <input type="button" class="next" value="&#5125;">
+        </div>
+        <input class="disableTips" type="checkbox">`
+
+    document.body.append(notificationWrapper);
+
+    addNotificationText(currentNotification);
+
+    setEventListeners(data, currentNotification, currentNotificationId);
 }
 
-async function getData() {
-    let resp = await fetch('data.json');
-    data = await resp.json();
-    showNotification(data.find(el => el.id == not));
+
+function addNotificationText(currentNotification) {
+    let notificationHead = document.querySelector('.notHead');
+    let notificationBody = document.querySelector('.notBody');
+
+    notificationHead.innerHTML = currentNotification.title;
+    notificationBody.innerHTML = currentNotification.phrase;
 }
 
-function showNotification(element) {
-    let component = createBlock('section', 'component');
-    let notText = createBlock('div', 'notText');
-    let header = createBlock('h3', 'notHead');
-    let body = createBlock('p', 'notBody');
-    let closeButton = createBlock('i', 'fas fa-times close');
-    let disableTips = createBlock('input', 'disableTips');
-    let pagination = createPagination('div', 'pagination');
-
-    disableTips.type = 'checkbox';
-
-    closeButton.tabIndex = 1;
-    disableTips.tabIndex = 5;
-
-    notText.append(header, body);
-    component.append(notText, closeButton, pagination, disableTips);
-    document.body.append(component);
-
-    addNotificationText(element);
-}
-
-function createBlock(teg, tegClass) {
-    let block = document.createElement(teg);
-    block.className = tegClass;
-    return block;
-}
-
-function createPagination(teg, tegClass) {
-    let pagination = createBlock(teg, tegClass);
-    let prev = createBlock('i', 'fas fa-angle-left prev');
-    let next = createBlock('i', 'fas fa-angle-right next');
-    prev.tabIndex = 2;
-    next.tabIndex = 4;
-
-    pagination.append(prev);
-
-    for (let item of data) {
-        let block = document.createElement('input');
-        block.type = 'radio';
-        block.name = 'radioButton';
-        block.id = item.id;
-        block.tabIndex = 3;
-        if (item.id === not) {
-            block.checked = true;
+function setEventListeners(data, currentNotification, currentNotificationId) {
+    const paginationButton = document.querySelector('.pagination');
+    paginationButton.addEventListener('click', (ev) => {
+        if (ev.target.name === 'radioButton') {
+            currentNotificationId = +ev.target.id;
+            currentNotification = data.find(el => el.id == currentNotificationId)
+            addNotificationText(currentNotification);
+            localStorage.setItem('currentNotificationId', currentNotificationId);
         }
-        pagination.append(block);
-    }
+    });
 
-    pagination.append(next);
-
-    return pagination;
-}
-
-
-function addNotificationText(element) {
-    let head = document.querySelector('.notHead');
-    let body = document.querySelector('.notBody');
-
-    head.innerHTML = element.title;
-    body.innerHTML = element.phrase;
-}
-
-document.querySelector('body').addEventListener('click', clickOnBody);
-document.querySelector('body').addEventListener('keydown', (ev) => {
-    if (ev.keyCode === 13) {
-        clickOnBody(ev);
-    }
-    if (ev.keyCode === 27) {
+    const closeButton = document.querySelector('.close');
+    closeButton.addEventListener('click', () => {
         document.querySelector('.component').remove();
-    }
-})
+    });
 
-function clickOnBody(ev) {
-    if (ev.target.name === 'radioButton') {
-        not = +ev.target.id;
-        addNotificationText(data.find(el => el.id == not));
-        localStorage.setItem('not', not);
-    };
+    const prevButton = document.querySelector('.prev')
+    prevButton.addEventListener('click', () => {
+        currentNotificationId = (currentNotificationId == 1) ? data.length : currentNotificationId - 1;
+        localStorage.setItem('currentNotificationId', currentNotificationId);
+        document.getElementById(currentNotificationId).checked = true;
+        currentNotification = data.find(el => el.id == currentNotificationId)
+        addNotificationText(currentNotification);
+    })
 
-    if (ev.target.className === 'fas fa-times close') {
-        document.querySelector('.component').remove();
-    }
+    const nextButton = document.querySelector('.next')
+    nextButton.addEventListener('click', () => {
+        currentNotificationId = (currentNotificationId == data.length) ? 1 : currentNotificationId + 1;
+        localStorage.setItem('currentNotificationId', currentNotificationId);
+        document.getElementById(currentNotificationId).checked = true;
+        currentNotification = data.find(el => el.id == currentNotificationId)
+        addNotificationText(currentNotification);
+    })
 
-    if (ev.target.className === 'disableTips') {
+    const disableTips = document.querySelector('.disableTips');
+    disableTips.addEventListener('click', (ev) => {
         if (ev.keyCode === 13 && ev.target.checked === false) {
             ev.target.checked = true;
         } else {
             if (ev.keyCode === 13 && ev.target.checked === true) {
                 ev.target.checked = false;
             }
+            localStorage.setItem('isNotificationDisable', ev.target.checked);
         }
-        localStorage.setItem('key', ev.target.checked);
-    }
-
-    if (ev.target.className === 'fas fa-angle-left prev') {
-        not = (not == 1) ? data.length : not - 1;
-        localStorage.setItem('not', not);
-        document.getElementById(not).checked = true;
-        addNotificationText(data.find(el => el.id == not));
-    }
-
-    if (ev.target.className === 'fas fa-angle-right next') {
-        not = (not == data.length) ? 1 : not + 1;
-        localStorage.setItem('not', not);
-        document.getElementById(not).checked = true;
-        addNotificationText(data.find(el => el.id == not));
-    }
+    })
 }
+
+
+
+
+// document.querySelector('body').addEventListener('click', clickOnBody);
+// document.querySelector('body').addEventListener('keydown', (ev) => {
+//     if (ev.keyCode === 13) {
+//         clickOnBody(ev);
+//     }
+//     if (ev.keyCode === 27) {
+//         document.querySelector('.component').remove();
+//     }
+// })
+
+// function clickOnBody(ev) {
+//     if (ev.target.name === 'radioButton') {
+//         currentNotificationId = +ev.target.id;
+//         addNotificationText(data.find(el => el.id == currentNotificationId));
+//         localStorage.setItem('currentNotificationId', currentNotificationId);
+//     };
+
+//     if (ev.target.className === 'fas fa-times close') {
+//         document.querySelector('.component').remove();
+//     }
+
+//     if (ev.target.className === 'disableTips') {
+//         if (ev.keyCode === 13 && ev.target.checked === false) {
+//             ev.target.checked = true;
+//         } else {
+//             if (ev.keyCode === 13 && ev.target.checked === true) {
+//                 ev.target.checked = false;
+//             }
+//         }
+//         localStorage.setItem('isNotificationDisable', ev.target.checked);
+//     }
+
+//     if (ev.target.className === 'fas fa-angle-left prev') {
+//         currentNotificationId = (currentNotificationId == 1) ? data.length : currentNotificationId - 1;
+//         localStorage.setItem('currentNotificationId', currentNotificationId);
+//         document.getElementById(currentNotificationId).checked = true;
+//         addNotificationText(data.find(el => el.id == currentNotificationId));
+//     }
+
+//     if (ev.target.className === 'fas fa-angle-right next') {
+//         currentNotificationId = (currentNotificationId == data.length) ? 1 : currentNotificationId + 1;
+//         localStorage.setItem('currentNotificationId', currentNotificationId);
+//         document.getElementById(currentNotificationId).checked = true;
+//         addNotificationText(data.find(el => el.id == currentNotificationId));
+//     }
+// }
