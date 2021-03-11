@@ -1,0 +1,110 @@
+html {
+    font-size: 16px;
+    line-height: 15;
+}
+
+.component {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    max-width: 400px;
+    height: 250px;
+    padding: 40px 40px 20px 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-left: 10px;
+    line-height: 1.2;
+}
+
+.notText {
+    display: grid;
+    height: 170px;
+    grid-template-rows: auto auto;
+}
+
+.notHead {
+    font-size: 1.5rem;
+}
+
+.notBody {
+    font-size: 1rem;
+    margin-top: 20px;
+    overflow: auto;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+}
+
+.close:hover,
+.prev:hover,
+.next:hover {
+    color: rgb(83, 83, 83);
+}
+
+.disableTips {
+    margin-top: 10px;
+    margin-right: 85px;
+    float: right;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.disableTips::after {
+    content: 'Disable Tips ';
+    margin-left: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.prev,
+.next {
+    font-size: 1.2em;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+
+}
+
+[name=radioButton] {
+    margin: 0px 3px;
+    cursor: pointer;
+}
+
+:focus {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 1px solid black;
+}
+
+@media (max-width: 425px) {
+    html {
+        font-size: 14px;
+    }
+
+    .component {
+        padding: 15px;
+    }
+
+    .close {
+        right: -5px;
+        top: -5px;
+    }
+
+    .prev,
+    .next {
+        font-size: 1.4rem;
+        padding: 4px 3px;
+    }
+}
