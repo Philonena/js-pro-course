@@ -1,42 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Mocha</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
-    <script src="../node_modules/mocha/mocha.js"></script>
-    <script src="../node_modules/chai/chai.js"></script>
-
-    <script type="module" class="mocha-init">
-        mocha.setup('bdd');
-    </script>
-
-    <!-- ------------------------------------ -->
-    <script type="module" src="index.js"></script>  
-    <script type="module" src="createWeatherBlockText.js"></script>  
-    <script type="module" src="createHistoryBlock.js"></script>  
-    <script type="module" src="showWeatherBlock.js"></script>  
-    <script type="module" src="savingDataToHistory.js"></script>  
-    <!-- <script type="module" src="clearHistory.js"></script>   -->
-    <!-- ------------------------------------ -->
-
-    <script type="module">
-        mocha.run();
-    </script>
 </head>
+
 <body>
     <div id="mocha"></div>
     <div class="container" style="display: none;">
-      <form id="form">
-          <input type="text" required id="city" placeholder="Enter city">
-          <input type="text" id="country" placeholder="Enter country">
-          <input type="submit" id="button" value="Submit">
-      </form>
-      <div class="buttonBlock">
-          <input type="button" id="button" value="Histori" class="historyButton">
-          <input type="button" id="button" value="My weather" class="myWeatherButton">    
-      </div>
-  </div>
+        <form id="form">
+            <input type="text" required id="city" placeholder="Enter city">
+            <input type="text" id="country" placeholder="Enter country">
+            <input type="submit" id="button" value="Submit">
+        </form>
+        <div class="buttonBlock">
+            <input type="button" id="button" value="Histori" class="historyButton">
+            <input type="button" id="button" value="My weather" class="myWeatherButton">
+        </div>
+    </div>
 </body>
+
 </html>
