@@ -1,0 +1,22 @@
+{
+  "name": "hw7-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "browserify ./src/script/index.js -o ./dist/bundle.js -t [ babelify --presets [ @babel/preset-env ] --plugins [ @babel/plugin-transform-async-to-generator @babel/plugin-transform-runtime ] ]"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-transform-async-to-generator": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2"
+  }
+}

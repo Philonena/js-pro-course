@@ -1,0 +1,41 @@
+{
+    "request": {
+        "type": "LatLon",
+        "query": "Lat 53.93 and Lon 27.60",
+        "language": "en",
+        "unit": "m"
+    },
+    "location": {
+        "name": "test",
+        "country": "test",
+        "region": "test",
+        "lat": "53.917",
+        "lon": "27.600",
+        "timezone_id": "Europe/Minsk",
+        "localtime": "2021-03-20 16:02",
+        "localtime_epoch": 1616256120,
+        "utc_offset": "3.0"
+    },
+    "current": {
+        "observation_time": "01:02 PM",
+        "temperature": 0,
+        "weather_code": 326,
+        "weather_icons": [
+            "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0011_light_snow_showers.png"
+        ],
+        "weather_descriptions": [
+            "Light Snow Shower"
+        ],
+        "wind_speed": 26,
+        "wind_degree": 280,
+        "wind_dir": "W",
+        "pressure": 1017,
+        "precip": 0,
+        "humidity": 74,
+        "cloudcover": 62,
+        "feelslike": -4,
+        "uv_index": 1,
+        "visibility": 10,
+        "is_day": "yes"
+    }
+}
