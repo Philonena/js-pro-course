@@ -6,7 +6,7 @@ class Component extends React.Component {
         super(props);
 
         this.state = {
-            counter: document.querySelector('.counter') || 0
+            counter: 0
         }
     }
 
