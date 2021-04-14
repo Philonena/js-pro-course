@@ -1,0 +1,42 @@
+.component {
+    width: 300px;
+    border: 1px solid rgb(51, 51, 51);
+    margin: 0px auto;
+    margin: 30px;
+}
+
+.counter {
+    color: rgb(51, 51, 51);
+    font-size: 120px;
+    text-align: center;
+    margin: 30px auto;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.plusButton,
+.refreshButton,
+.minusButton {
+    width: 100%;
+    height: 100%;
+    font-size: 80px;
+    color: white;
+    border: none;
+    margin: 0;
+}
+
+.plusButton {
+    background-color: rgb(38, 196, 38);
+}
+
+.refreshButton {
+    background-color: rgb(229, 255, 0);
+    color: black;
+}
+
+.minusButton {
+    background-color: rgb(255, 0, 0);
+}
