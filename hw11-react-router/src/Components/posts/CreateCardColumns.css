@@ -1,0 +1,13 @@
+.cards {
+  padding: 1rem;
+}
+
+.card-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+#btn {
+  margin: 0px auto;
+  display: block;
+}
